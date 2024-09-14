@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -25,13 +26,16 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="username" placeholder="Username" onChange={handleChange} required />
-            <br/>
-            <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-            <br/>
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <Navbar/>
+            <form onSubmit={handleSubmit}>
+                <input name="username" placeholder="Username" onChange={handleChange} required />
+                <br/>
+                <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
+                <br/>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     );
 };
 

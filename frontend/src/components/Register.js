@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ const Register = () => {
 
     return (
         <div>
+            <Navbar/>
             <form onSubmit={handleSubmit}>
                 <input name="username" placeholder="Username" onChange={handleChange} required />
                 <br/>
