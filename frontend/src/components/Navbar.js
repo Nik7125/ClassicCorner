@@ -11,6 +11,7 @@ const Navbar = () => {
         const storedUser = localStorage.getItem("currentUser");
         setLogged(storedLogged);
         setCurrentUser(storedUser || '');
+        console.log("Stored User in Navbar:", storedUser);
     }, []);
 
     const navigate = useNavigate();
@@ -34,7 +35,8 @@ const Navbar = () => {
                     <>
                         <span style={styles.navItem}>Hello,{currentUser}</span>
                         <Link to="/add-item" style={styles.navItem}>Add Item</Link>
-                        <Link onClick={handleLogout} style={styles.navItem}>Logout</Link>
+                        <Link to="/profile" style={styles.navItem}>Profile</Link>
+                        <a onClick={handleLogout} style={styles.navItem}>Logout</a>
                     </>
                 ) : (
                     <>

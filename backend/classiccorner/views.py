@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
 from .models import Item
-from .serializers import ItemSerializer
+from .serializers import ItemSerializer, ProfileSerializer
 
 # View to add a new item
 class ItemCreateView(generics.CreateAPIView):
@@ -16,6 +16,23 @@ class ItemListView(generics.ListAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
+@api_view(['POST'])
+def profile_view(request):
+    username = request.data.get('username')  # assuming the username is passed in the request body
+    try:
+        user = User.objects.get(username=username)
+        profile_serializer = ProfileSerializer(user)
+        
+        items = Item.objects.filter(owner=username)
+        items_serializer = ItemSerializer(items, many=True)
+        
+        return Response({
+            'profile': profile_serializer.data,
+            'items': items_serializer.data
+        }, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    
 @api_view(['POST'])
 def register(request):
     username = request.data.get('username')

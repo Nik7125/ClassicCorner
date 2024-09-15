@@ -18,12 +18,12 @@ const ItemList = () => {
       {items.map((item) => (
         <div key={item.id}>
           <h2>{item.name}</h2>
-          <p>Year: {item.year_of_manufacturing}</p>
-          <p>Description: {item.description}</p>
-          <p>Price: ${item.price}</p>
-          <p>Category: {item.category}</p>
-          {console.log(item.image)}
           {item.image && <img src={`${item.image}`} alt={item.name} width="200" />}
+          <p>Year : {item.year_of_manufacturing}</p>
+          <p>Description : {item.description}</p>
+          <p>Price : ${item.price}</p>
+          <p>Category : {item.category}</p>
+          <p>Posted By {item.owner}</p>
         </div>
       ))}
     </div>
