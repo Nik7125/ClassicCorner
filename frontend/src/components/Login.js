@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +21,10 @@ const Login = () => {
             .then((response) => {
                 localStorage.setItem('access_token', response.data.access);
                 console.log(response.data)
+                localStorage.setItem("logged", true);
+                localStorage.setItem("currentUser", formData.username);
                 alert('Login successful');
+                navigate('/');
             })
             .catch((error) => {
                 alert('Error: ' + error.response.data.detail);

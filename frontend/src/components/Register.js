@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { useNavigate} from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -20,11 +21,14 @@ const Register = () => {
         setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8000/api/register/', formData)
             .then((response) => {
                 alert('User registered successfully');
+                navigate('/login');
             })
             .catch((error) => {
                 alert('Error: ' + error.response.data.error);

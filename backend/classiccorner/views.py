@@ -3,6 +3,18 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
+from rest_framework import generics
+from .models import Item
+from .serializers import ItemSerializer
+
+# View to add a new item
+class ItemCreateView(generics.CreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+# View to list all items
+class ItemListView(generics.ListAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
 @api_view(['POST'])
 def register(request):
