@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const currentUser = localStorage.getItem("currentUser");
@@ -21,6 +22,17 @@ const Profile = () => {
         };
         fetchProfile();
     }, [currentUser]);
+
+    const handleDelete = async (id) => {
+        if (window.confirm("Are you sure you want to delete this item?")) {
+          try {
+            await axios.delete(`http://127.0.0.1:8000/api/items/${id}/delete/`);
+            setItems(items.filter(item => item.id !== id));  // Remove the deleted item from the state
+          } catch (error) {
+            console.error("Failed to delete item:", error);
+          }
+        }
+      };
 
     return (
         <div>
@@ -49,6 +61,8 @@ const Profile = () => {
                     <p>Description : {item.description}</p>
                     <p>Price : ${item.price}</p>
                     <p>Category : {item.category}</p>
+                    <Link to={`/update-item/${item.id}`}>Update</Link>
+                    <button onClick={() => handleDelete(item.id)}>Delete</button>
                     </div>
                 ))}
             </div>

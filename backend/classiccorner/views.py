@@ -16,6 +16,14 @@ class ItemListView(generics.ListAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
 
+class ItemUpdateView(generics.RetrieveUpdateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+class ItemDeleteView(generics.DestroyAPIView):
+    queryset = Item.objects.all()
+    lookup_field = 'pk'    
+
 @api_view(['POST'])
 def profile_view(request):
     username = request.data.get('username')  # assuming the username is passed in the request body
