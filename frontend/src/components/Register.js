@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -38,27 +38,31 @@ const Register = () => {
     return (
         <div>
             <Navbar/>
-            <form onSubmit={handleSubmit}>
-                <input name="username" placeholder="Username" onChange={handleChange} required />
-                <br/>
-                <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-                <br/>
-                <input name="first_name" placeholder="First Name" onChange={handleChange} required />
-                <br/>
-                <input name="last_name" placeholder="Last Name" onChange={handleChange} required />
-                <br/>
-                <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-                <br/>
-                <input name="confirm_password" type="password" placeholder="Confirm Password" onChange={handleChange} required />
-                <br/>
-                <input type="checkbox" name="terms_agreed" onChange={handleChange} required />
-                <label>
-                    I agree to the <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setShowModal(true)}>Terms and Conditions</span>
-                </label>
-                <br/>
-                <button type="submit">Register</button>
-            </form>
-
+            <div className="flex w-full relative" style={{ backgroundImage: "url('02.jpg')", backgroundSize: 'cover', height:"calc(100vh - 47px)"}}>
+                <div className='w-6/12 h-full flex items-center justify-center p-10'>
+                    <img src='Vintage-Objects-PNG-Photo.png' alt="typewriter" className='w-10/12'/>
+                </div>
+                <div className='w-6/12 h-full pe-8 py-8'>
+                    <form onSubmit={handleSubmit}>
+                        <fieldset className="border border-black p-5 pt-3 rounded-md">
+                            <legend className="text-lg">&nbsp;Register&nbsp;</legend>
+                            <input name="username" placeholder="Username" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input name="email" type="email" placeholder="Email" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input name="first_name" placeholder="First Name" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input name="last_name" placeholder="Last Name" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input name="password" type="password" placeholder="Password" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input name="confirm_password" type="password" placeholder="Confirm Password" onChange={handleChange} className="block border border-black rounded-md bg-transparent p-1 ps-3 my-2 w-full" required />
+                            <input type="checkbox" name="terms_agreed" onChange={handleChange} className="mr-2" required />
+                            <label>
+                                I agree to the <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setShowModal(true)}>Terms and Conditions</span>
+                            </label>
+                            <br/>
+                            <button type="submit" className="bg-transparent border border-black px-3 py-2 mt-3 rounded hover:shadow-[2.5px_2.5px_1px_black] duration-300">Register</button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            
             {/* Terms and Conditions Modal */}
             {showModal && (
                 <div style={{

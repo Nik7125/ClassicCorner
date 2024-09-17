@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
+import "./ItemList.css";
 
 const Profile = () => {
     const currentUser = localStorage.getItem("currentUser");
@@ -37,40 +38,64 @@ const Profile = () => {
     return (
         <div>
             <Navbar/>
-            <h1>Profile</h1>
-            {profile ? (
-                <div>
-                    <p>Username : {profile.username}</p>
-                    <p>Email : {profile.email}</p>
-                    <p>First Name : {profile.first_name}</p>
-                    <p>Last Name : {profile.last_name}</p>
+            <div className="w-full p-7" style={{ backgroundImage: "url('02.jpg')", backgroundSize: 'cover'}}>
+            
+            <fieldset className="border border-black p-5 pt-3 rounded-md">
+                <legend className="text-xl">&nbsp;Profile&nbsp;</legend>
+                {profile ? (
+                    <div>
+                        <p>First Name : {profile.first_name}</p>
+                        <p>Last Name : {profile.last_name}</p>
+                        <p>Username : {profile.username}</p>
+                        <p>Email : {profile.email}</p>
+                    </div>
+                ) : (
+                    <p>Loading profile...</p>
+                )}
+            </fieldset>
+
+            <br/>
+
+            <fieldset className="border border-black p-5 pt-3 rounded-md pb-8">
+                <legend className="text-xl">&nbsp;Your Items&nbsp;</legend>
+            
+            {items.length > 0 ? (
+                    <div className="grid grid-cols-3 gap-4">
+                        {items.map((item) => (
+                            <div key={item.id}>
+                            <div className="wsk-cp-product">
+                                <div className="wsk-cp-img">
+                                    <img src={`http://127.0.0.1:8000${item.image}`} alt={item.name} className="img-responsive" />
+                                </div>
+
+                                <div className="wsk-cp-text">
+                                    <div className="category">
+                                    <span>{item.category}</span>
+                                    </div>
+                                    <div className="title-product">
+                                    <h3>{item.name}</h3>
+                                    </div>
+                                    <div className="description-prod">
+                                    <p>{item.description}</p>
+                                    </div>
+                                    <div className="card-footer">
+                                        <div className="wcf-left"><span className="price">${item.price}</span></div>
+                                        <div className="wcf-right">
+                                            <Link to={`/update-item/${item.id}`} className='bg-transparent border border-black px-1 py-1 rounded hover:shadow-[2.5px_2.5px_1px_black] duration-300 text-sm mr-2'>Update</Link>
+                                            <button onClick={() => handleDelete(item.id)} className='bg-transparent border border-black p-[0.18rem] px-2 rounded hover:shadow-[2.5px_2.5px_1px_black] duration-300 text-sm'>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        ))}
                 </div>
             ) : (
-                <p>Loading profile...</p>
-            )}
-
-            <h2>Your Items</h2>
-            {items.length > 0 ? (
-            <div>
-                {items.map((item) => (
-                    <div key={item.id}>
-                    {console.log(item.image)}
-                    <h2>{item.name}</h2>
-                    {item.image && <img src={`http://127.0.0.1:8000${item.image}`} alt={item.name} width="200" />}
-                    <p>Year : {item.year_of_manufacturing}</p>
-                    <p>Description : {item.description}</p>
-                    <p>Price : ${item.price}</p>
-                    <p>Category : {item.category}</p>
-                    <Link to={`/update-item/${item.id}`}>Update</Link>
-                    <button onClick={() => handleDelete(item.id)}>Delete</button>
-                    </div>
-                ))}
-            </div>
-                  ) : (
                 <p>No items found.</p>
             )}
+            </fieldset>
 
-
+            </div>
         </div>
     );
 };

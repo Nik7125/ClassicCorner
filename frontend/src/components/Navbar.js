@@ -54,7 +54,9 @@ const styles = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        backgroundColor: "brown",
+        backgroundColor: '#652526',
+        // backgroundImage: "url('05.jpeg')",
+        // backgroundSize: 'cover',
         padding: '10px 20px',
     },
     navLinks: {

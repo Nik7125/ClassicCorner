@@ -47,6 +47,22 @@ const AddItem = () => {
     }
   };
 
+  const categories = [
+    "Furniture",
+    "Clothing",
+    "Antiques",
+    "Vinyl Records",
+    "Cameras",
+    "Books",
+    "Art",
+    "Collectibles",
+    "Home Decor",
+    "Toys & Games",
+    "Jewelry",
+    "Retro Tech",
+    "Accessories"
+  ];
+
   return (
     <form onSubmit={handleSubmit}>
       <input
@@ -80,13 +96,26 @@ const AddItem = () => {
         onChange={handleChange}
         required
       />
-      <input
+      {/* <input
         type="text"
         name="category"
         placeholder="Category"
         value={item.category}
         onChange={handleChange}
-      />
+      /> */}
+      <select
+        name="category"
+        value={item.category}
+        onChange={handleChange}
+        required
+      >
+        <option value="" disabled>Select a Category</option>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
       <input
         type="file"
         name="image"
